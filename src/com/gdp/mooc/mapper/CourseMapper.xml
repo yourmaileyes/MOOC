@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdp.mooc.mapper.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.gdp.mooc.entity.Course" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="context" property="context" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="label" property="label" jdbcType="VARCHAR" />
+    <result column="hour" property="hour" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, context, type, price, label, hour
+  </sql>
+  <select id="selectlastcourse" resultMap="BaseResultMap">
+  SELECT * from course ORDER BY id desc LIMIT 0,1
+  </select>
+  <select id="freecourse"  resultMap="BaseResultMap" >
+    select *
+    from course where type = 0
+        
+  </select>
+  <select id="vipcourse"  resultMap="BaseResultMap" >
+    select *
+    from course where type = 1
+        
+  </select>
+  <select id="coursesearch" parameterType="String" resultMap="BaseResultMap" >
+    select *
+    from course where name like 
+    
+        concat('%',#{0},'%')
+        
+  </select>
+<select id="selectAllCourse" resultMap="BaseResultMap"  >
+    select *
+    from course
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from course
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gdp.mooc.entity.Course" >
+    insert into course (id, name, context, 
+      type, price, label, 
+      hour)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{context,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, 
+      #{hour,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gdp.mooc.entity.Course" >
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="label != null" >
+        label,
+      </if>
+      <if test="hour != null" >
+        hour,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+         #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="hour != null" >
+        #{hour,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gdp.mooc.entity.Course" >
+    update course
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="label != null" >
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="hour != null" >
+        hour = #{hour,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gdp.mooc.entity.Course" >
+    update course
+    set name = #{name,jdbcType=VARCHAR},
+      context = #{context,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      hour = #{hour,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

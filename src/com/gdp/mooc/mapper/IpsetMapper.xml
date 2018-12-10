@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdp.mooc.mapper.IpsetMapper" >
+  <resultMap id="BaseResultMap" type="com.gdp.mooc.entity.Ipset" >
+    <id column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="mark" property="mark" jdbcType="VARCHAR" />
+    <result column="firsttime" property="firsttime" jdbcType="TIMESTAMP" />
+    <result column="bantime" property="bantime" jdbcType="TIMESTAMP" />
+    <result column="totime" property="totime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ip,type, mark,firsttime,bantime,totime
+  </sql>
+
+<select id="select" resultMap="BaseResultMap">
+    select *
+    from Ipset 
+    ORDER BY firsttime desc
+  </select>
+  
+  <select id="selectip" resultMap="BaseResultMap" parameterType="String">
+    select *
+    from Ipset where ip = #{ip}
+  </select>
+  <insert id="insert" parameterType="com.gdp.mooc.entity.Ipset" >
+      insert into Ipset
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    ip,
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="mark != null" >
+        mark,
+      </if>
+        firsttime,
+      <if test="bantime != null" >
+       bantime,
+      </if>
+      <if test="totime != null" >
+        totime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+    #{ip,jdbcType=VARCHAR},
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=VARCHAR},
+      </if>
+       now(),
+      <if test="bantime != null" >
+       #{bantime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totime != null" >
+       #{totime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gdp.mooc.entity.Ipset" >
+    update Ipset
+    <set >
+      <if test="mark != null" >
+       mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+       type =  #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="firsttime != null" >
+       firsttime = #{firsttime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="bantime != null" >
+       bantime = #{bantime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totime != null" >
+       totime = #{totime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ip = #{ip,jdbcType=INTEGER}
+  </update>
+</mapper>

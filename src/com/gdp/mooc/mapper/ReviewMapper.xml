@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gdp.mooc.mapper.ReviewMapper" >
+  <resultMap id="BaseResultMap" type="com.gdp.mooc.entity.Review" >
+    <id column="reviewid" property="reviewid" jdbcType="VARCHAR" />
+    <result column="courseid" property="courseid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="context" property="context" jdbcType="VARCHAR" />
+    <result column="lable" property="lable" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="vip" property="vip" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    reviewid,courseid, username,context,lable,time,sex,vip
+  </sql>
+
+<select id="select" resultMap="BaseResultMap" parameterType="int" >
+    select *
+    from review
+    where courseid = #{courseid} ORDER BY time asc
+  </select>
+  <select id="selectbyuserid" resultMap="BaseResultMap" parameterType="int" >
+    select *
+    from review
+    where username = #{username} 
+  </select>
+  <delete id="delete" parameterType="com.gdp.mooc.entity.Review" >
+    delete from review
+    where courseid = #{courseid,jdbcType=INTEGER} 
+  </delete>
+  <insert id="insert" parameterType="com.gdp.mooc.entity.Review" >
+      insert into review
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reviewid != null" >
+        reviewid,
+      </if>
+      <if test="courseid != null" >
+        courseid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+      <if test="lable != null" >
+        lable,
+      </if>
+        time,
+        <if test="sex != null" >
+        sex,
+      </if>
+      <if test="vip != null" >
+        vip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reviewid != null" >
+        #{reviewid,jdbcType=VARCHAR},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="lable != null" >
+        #{lable,jdbcType=VARCHAR},
+      </if>
+       now(),
+       <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null" >
+        #{vip,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gdp.mooc.entity.Review" >
+    update review
+    <set >
+      
+      <if test="courseid != null" >
+       courseid = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+       username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+       context =  #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="lable != null" >
+       lable = #{lable,jdbcType=VARCHAR},
+      </if>
+       <if test="time != null" >
+       time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+       sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null" >
+       vip = #{vip,jdbcType=INTEGER},
+      </if>
+    </set>
+    where reviewid = #{reviewid,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

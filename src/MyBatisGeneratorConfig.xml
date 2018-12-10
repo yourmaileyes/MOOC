@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- 引入配置文件 -->
+	<properties resource="jdbc.properties"/>
+	
+	<!-- 指定数据连接驱动jar地址 -->
+	<classPathEntry location="${driverPath}" />
+	
+	<!-- 一个数据库一个context -->
+	<context id="infoGuardian" targetRuntime="MyBatis3">
+		<!-- 注释 -->
+		<commentGenerator >
+			<property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+			<property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+		</commentGenerator>
+		
+		<!-- jdbc连接 -->
+		<jdbcConnection 
+		    driverClass="${jdbc_driver}"
+			connectionURL="${jdbc_url}" 
+			userId="${jdbc_user}"
+			password="${jdbc_password}" />
+		
+		<!-- 类型转换 -->
+		<javaTypeResolver>
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="false"/>
+		</javaTypeResolver>
+		
+		<!-- 生成实体类地址 -->	
+		<javaModelGenerator targetPackage="${entity}" targetProject="${project}" >
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+			<property name="enableSubPackages" value="false"/>
+			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+		
+		<!-- 生成mapxml文件 -->
+		<sqlMapGenerator targetPackage="${dao}" targetProject="${project}" >
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		
+		<!-- 生成mapxml对应client，也就是接口dao -->	
+		<javaClientGenerator targetPackage="${dao}" targetProject="${project}" type="XMLMAPPER" >
+			<!-- 是否在当前路径下新加一层schema,eg：fase路径cn.ffcs.test.domain"， true:cn.ffcs.test.domain".[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		
+		<!-- schema即为数据库名
+		     tableName为对应的数据库表  可以使用通配符%
+		     domainObjectName是要生成的实体类  
+		     enable*ByExample   是否生成 example类   -->	
+		<table schema="${jdbc_user}" tableName="user" domainObjectName="User"  
+			enableSelectByExample="false"
+			enableCountByExample="false"
+			enableUpdateByExample="false"
+			enableDeleteByExample="false"> 
+			
+		</table>
+		<table schema="${jdbc_user}" tableName="course" domainObjectName="Course" 
+			enableSelectByExample="false"
+			enableCountByExample="false"
+			enableUpdateByExample="false"
+			enableDeleteByExample="false"> 
+		</table>
+	</context>
+</generatorConfiguration>

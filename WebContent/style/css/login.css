@@ -1,0 +1,8 @@
+input.denglu-input {
+	width: 270px;
+	padding: 12px 14px;
+	background-color: #fff;
+	box-shadow: 2px 0 5px 0 #fff;
+	border: 1px solid rgba(84, 92, 99, .6);
+	border-radius: 6px;
+}
