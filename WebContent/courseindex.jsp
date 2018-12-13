@@ -208,7 +208,7 @@
 </div>  
   <footer style="text-align: center">
     <hr>
-<p class="am-padding-left">© 2018 <a href="#">达内北京海淀基地</a>. 作者:杨祺晖</p>
+<p class="am-padding-left">© 2018 <a href="#">山西农业大学北京海淀基地</a>. 作者:杨祺晖</p>
 </footer>
   
 </body>  
