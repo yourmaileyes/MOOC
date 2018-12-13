@@ -21,3 +21,5 @@
 管理员密码：admin
 
 充值密码以及删除密码为：591284209
+
+![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/1.png)
