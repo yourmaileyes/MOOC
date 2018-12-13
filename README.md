@@ -24,7 +24,7 @@
 
 ![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/1.png)
 
-![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/2.png)
+
 
 ![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/3.png)
 
