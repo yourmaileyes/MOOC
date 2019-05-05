@@ -1,8 +1,12 @@
 # MOOC
 在线视频教育网站SSM框架
 此项目同时是本人的毕业设计！
+联系我：ccnoobs@sina.com<br>
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+<br>
 1)登录模块
-在进入系统首页后，首先看到的是登录界面，该界面会提供注册用户的功能，在登陆界面，输入用户名之后，
+在进入系统首页后，首先看到的是登录界面，该界面会提供注册用户的功能，在登录界面，输入用户名之后，
 首先要发送ajax请求验证用户名是否存在，第一时间内给用户提示。
 2)客户端模块
 本模块分为密钥管理，角色管理，权限管理，个人信息，课程信息等组成。
@@ -21,3 +25,19 @@
 管理员密码：admin
 
 充值密码以及删除密码为：591284209
+
+![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/1.png)
+
+
+
+![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/3.png)
+
+![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/4.png)
+
+![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/5.png)
+
+![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/6.png)
+
+![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/7.png)
+
+![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/8.png)
