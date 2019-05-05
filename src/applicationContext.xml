@@ -9,9 +9,9 @@ http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 <!-- datasource -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/mooc"></property>
+		<property name="url" value="jdbc:mysql://localhost:3307/mooc"></property>
 		<property name="username" value="root"></property>
-		<property name="password" value="123456"></property>
+		<property name="password" value="root"></property>
 	</bean>
 	<!-- sqlsessionFactory -->
 	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
