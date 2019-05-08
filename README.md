@@ -26,8 +26,8 @@
 
 充值密码以及删除密码为：591284209
 
----------------------MOOC V1.01更新----------------------------------
-重构主页index页面，使用bootstrap重写配适浏览器不通分辨率，后台管理页面全部完成配适浏览器分辨率。
+---------------------MOOC V1.01更新----------------------------------<br>
+重构主页index页面，使用bootstrap重写配适浏览器不通分辨率，后台管理页面全部完成配适浏览器分辨率。<br>
 2019.5.8
 
 ![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/1.png)
