@@ -17,7 +17,7 @@
 <body><%-- 
 	<%@include file="leftmeun.jsp"%> --%>
 	<div
-		style="float: left; margin-left: 500px; margin-top: 100px; background-color: #e7e7e7; width: 500px; height: 400px; padding-left:100px;padding: 20px;">
+		style="float: left; margin-left: 30%; margin-top: 100px; background-color: #e7e7e7; width: 500px; height: 400px; padding-left:100px;padding: 20px;">
 		<label for="ip">ip地址&nbsp;&nbsp;&nbsp;</label> <input type="text"
 			id="ip" value="${ip.ip}"
 			style="height: 46px; padding: 10px 16px; font-size: 18px; line-height: 1.3333333; border-radius: 6px; color: #555; background-color: #fff; background-image: none; border: 1px solid #ccc;"><br>

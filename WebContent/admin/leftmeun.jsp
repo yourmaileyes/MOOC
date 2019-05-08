@@ -64,10 +64,10 @@
         </div>
     </div>
 </div>
+<iframe style="text-align:center;" src="admin/adminindex.jsp"  width="80%" height="100%" name="rigt_main" frameborder="0" scrolling="auto"></iframe>
 <script src="style/js/menu.js"></script> <!--控制js-->
-<div style="text-align:center;">
+
 <div style="float: left;">
-<iframe src="admin/adminindex.jsp"  width="1600px" height="1200px" name="rigt_main" frameborder="0" scrolling="auto"></iframe>
 </div>
 </body>
 </html>

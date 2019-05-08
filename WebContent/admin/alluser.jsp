@@ -19,12 +19,11 @@
 <%-- <%@include file="leftmeun.jsp" %> --%>
 
 <body>
-<div>
 
-<div class="container" style="width: 1500px;margin-left: 0px;
+<div class="container" style="max-height: 99%; max-width:99%;margin-left: 0px;
     float:left; text-align:center;                margin-right: 0px;">
     <p style="font-size: 50px;">Mooc用户管理</p>
-			<div class="container" style="width: 1500px;margin-top: 50px;
+			<div class="container" style="max-height: 99%; max-width:99%;margin-top: 50px;
 			margin-right: 0px;padding-left: 0px;padding-right: 0px;">
 			<table class="table table-striped" width="950">
 				<tr>
@@ -136,7 +135,6 @@
 </div>
 </div>
 
-</div>
 </body>
 <script type="text/javascript">
 function reflash(){

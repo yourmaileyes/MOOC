@@ -21,10 +21,10 @@
 <body>
 	<div>
 		<div class="container"
-			style="width: 1500px; margin-left: 0px; float: left; margin-right: 0px;">
+			style="max-height: 100%; max-width:100%; margin-left: 0px; float: left; margin-right: 0px;">
 			<p style="font-size: 50px;text-align: center;">Mooc课程管理</p>
 			<div class="container"
-				style="width: 1500px; margin-top: 50px; margin-right: 0px; padding-left: 0px; padding-right: 0px;">
+				style="max-height: 100%; max-width:100%; margin-top: 50px; margin-right: 0px; padding-left: 0px; padding-right: 0px;">
 				<table class="table table-striped" width="950">
 					<tr>
 						<td class="col-md-2 text-center">课程ID</td>
