@@ -5,6 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-io-1.4.jar"/>
-	<classpathentry kind="lib" path="D:/Tomcat7.0/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="D:/apache-tomcat-7.0.94/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

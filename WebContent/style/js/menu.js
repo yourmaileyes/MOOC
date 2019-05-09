@@ -1,4 +1,5 @@
 window.onload = function () {
+	
     var flag = true;
     var liC = document.querySelectorAll(".navBox li h2");
     // 主导航nav点击事件
@@ -88,6 +89,14 @@ window.onload = function () {
         }, 100)
 
     }
+    var www = document.body.clientWidth;
+    var qqq = $("#menu").attr("width");
+    $("#iframe").attr("height",document.body.clientHeight);
+    $("#iframe").attr("width",www-280);
+}
+window.onresize = function(){
+	$("#iframe").attr("height",document.body.clientHeight);
+	$("#iframe").attr("width",document.body.clientWidth-280);
 }
 
 function getByClass(clsName, parent) {
