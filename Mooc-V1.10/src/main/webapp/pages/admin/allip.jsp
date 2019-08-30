@@ -103,7 +103,7 @@ function reflash(){
 }
 function prevpage(){
 	var page = ${page}-1;
-	window.location.href="logpage?page="+page;
+	window.location.href="allip?page="+page;
 }
 function nextpage(){
 	var maxpage = ${maxpage};
