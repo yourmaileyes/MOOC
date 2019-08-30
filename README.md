@@ -5,6 +5,8 @@
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 <br>
+项目演示地址：http://49.235.80.156 <br>
+MoocV1.01为SSM框架 MoocV1.10为spring boot框架<br>
 1)登录模块
 在进入系统首页后，首先看到的是登录界面，该界面会提供注册用户的功能，在登录界面，输入用户名之后，
 首先要发送ajax请求验证用户名是否存在，第一时间内给用户提示。
