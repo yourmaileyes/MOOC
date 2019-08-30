@@ -33,7 +33,8 @@ MoocV1.01为SSM框架 MoocV1.10为spring boot框架<br>
 2019.5.8更新<br>
 ---------------------MOOC V1.10更新----------------------------------<br>
 1.验证码更改为GIF动图，更好的人机过滤效果。<br>
-2.项目重构，将之前的SSM改为Spring Boot，原来SSM项目(V1.01版)将停止更新（包括此次验证码更新）。<br>
+2.优化IP日志访问浏览方式。<br>
+2.项目重构，将之前的SSM改为Spring Boot，原来SSM项目(V1.01版)将停止更新（包括此次更新）。<br>
 2019.8.30更新
 
 ![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/1.png)
