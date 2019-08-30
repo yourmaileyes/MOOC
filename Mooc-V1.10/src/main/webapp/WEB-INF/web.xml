@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>MOOC</display-name>
+ <welcome-file-list>
+    <welcome-file>index.do</welcome-file>
+  </welcome-file-list>
+  <error-page>
+  <error-code>404</error-code>
+  <location>/WEB-INF/404.jsp</location>
+  </error-page>
+  
+   <!-- spring容器初始化的监听器,会读取全局初始化的数据(xml文件) -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+  <!-- 全局初始化数据,spring的监听器读取此配置文件 
+	多个配置文件用分号分隔 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+		          classpath:spring/spring*.xml;
+		          	          
+		</param-value>
+	</context-param>
+  
+  <!-- 配置springmvc的编码字符集 -->
+  <filter>
+  	<filter-name>encodFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encodFilter</filter-name>
+  	<url-pattern>*.do</url-pattern>
+  </filter-mapping> 
+  <filter-mapping>
+  	<filter-name>encodFilter</filter-name>
+  	<url-pattern>*</url-pattern>
+  </filter-mapping>
+  <!-- 配置springmvc核心控制器 -->
+  <servlet>
+  	<servlet-name>springmvc</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>classpath:spring_mvc.xml</param-value>
+  	</init-param>   
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>springmvc</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping> 
+  <servlet-mapping>
+  	<servlet-name>springmvc</servlet-name>
+  	<url-pattern>/admin</url-pattern>
+  </servlet-mapping> 
+  
+</web-app>

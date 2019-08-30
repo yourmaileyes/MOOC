@@ -1,0 +1,17 @@
+   body {background-color:#f8f8f8;}
+ .active 
+{
+	color:blue;
+	text-decoration:underline
+}
+.container {
+					min-height: 70%;
+					height: auto !important;
+					height: 70%;
+					margin: 0 auto -80px;/*margin-bottom的负值等于footer高度*/
+				}
+				.push,
+	.footer {
+					height: 80px;
+					clear:both;
+				}

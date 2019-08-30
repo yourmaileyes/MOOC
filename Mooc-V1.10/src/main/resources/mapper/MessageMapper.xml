@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mooc.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.mooc.entity.Message" >
+    <id column="courseid" property="courseid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    courseid, userid
+  </sql>
+  <select id="selectMy" resultMap="BaseResultMap" parameterType="String" >
+    select *
+    from message
+    where userid = #{userid}
+  </select>
+<select id="select" resultMap="BaseResultMap" parameterType="com.mooc.entity.Message" >
+    select *
+    from message
+    where courseid = #{courseid} and userid = #{userid}
+  </select>
+  <delete id="delete" parameterType="com.mooc.entity.Message" >
+    delete from message
+    where courseid = #{courseid,jdbcType=INTEGER} and userid = #{userid}
+  </delete>
+  <insert id="insert" parameterType="com.mooc.entity.Message" >
+    insert into message (courseid, userid)
+    values (#{courseid,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR})
+  </insert>
+</mapper>

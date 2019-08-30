@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mooc.mapper.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.mooc.entity.Log" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="executor" property="executor" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,userid, username,type,ip,time,executor
+  </sql>
+
+<select id="select" resultMap="BaseResultMap">
+    select *
+    from log where executor is null
+    ORDER BY time desc
+  </select>
+   <select id="selectadminlogbyusername" resultMap="BaseResultMap">
+    select *
+    from log
+    where executor is not null and username = #{username} ORDER BY time desc
+  </select>
+  <select id="selectadminlog" resultMap="BaseResultMap">
+    select *
+    from log
+    where executor is not null ORDER BY time desc
+  </select>
+  <select id="selectbyusername" resultMap="BaseResultMap" parameterType="String" >
+    select *
+    from log
+    where username = #{username} ORDER BY time asc
+  </select>
+  <delete id="delete" parameterType="com.mooc.entity.Log" >
+    delete from log
+    where id = #{id,jdbcType=INTEGER} 
+  </delete>
+  <insert id="insert" parameterType="com.mooc.entity.Log" >
+      insert into log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+        time,
+        <if test="executor != null" >
+        executor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+       now(),
+       <if test="executor != null" >
+        #{executor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mooc.entity.Log" >
+    update log
+    <set >
+      <if test="username != null" >
+       username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+       type =  #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+       ip = #{ip,jdbcType=VARCHAR},
+      </if>
+       <if test="time != null" >
+       time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="executor != null" >
+       executor = #{executor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

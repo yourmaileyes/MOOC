@@ -1,0 +1,351 @@
+.aui-content-box {
+    position: relative;
+    width: 815px;
+    border-right: solid 1px #f0f0f0;
+    height: 275px;
+    margin: 0 auto;
+    background: #fff;
+    float: left;
+}
+
+.aui-content-item-img {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    left: 50%;
+    margin-left: -70px;
+    top: 40px;
+    -webkit-transition: opacity ease .2s;
+    -o-transition: opacity ease .2s;
+    -moz-transition: opacity ease .2s;
+    transition: opacity ease .2s;
+}
+
+.aui-content-item-img img {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    -webkit-transition: opacity .2s linear;
+    -o-transition: opacity .2s linear;
+    -moz-transition: opacity .2s linear;
+    transition: opacity .2s linear;
+}
+
+.aui-content-item-name {
+    position: absolute;
+    top: 190px;
+    left: 0;
+    width: 160px;
+    padding: 0 15px;
+    line-height: 30px;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #666;
+    font-size: 13px;
+}
+
+.aui-content-box-list ul li {
+    float: left;
+    border-right: 1px solid #eee;
+}
+
+.aui-content-box-list ul li a {
+    position: relative;
+    display: block;
+    width: 190px;
+    height: 275px;
+    text-align: center;
+    margin: auto;
+}
+
+.aui-content-box-list ul li a img {
+    transition: all 0.5s;
+}
+
+.aui-content-box-list ul li a:hover img {
+    transform: scale(1.1);
+    transition: all 0.5s;
+}
+
+.aui-content-price {
+    position: absolute;
+    left: 15px;
+    top: 230px;
+    width: 160px;
+    height: 20px;
+    padding: 1px;
+    background: #e6382f;
+    line-height: 20px;
+}
+
+.aui-content-price-new {
+    float: left;
+    width: 80px;
+    height: 20px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    background: #e6382f;
+    line-height: 20px;
+}
+
+.aui-content-price-new i {
+    /* margin-right: 3px; */
+    font-family: arial;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.aui-content-price-new span {
+    height: 20px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.aui-content-price-origin {
+    float: left;
+    width: 80px;
+    height: 20px;
+    background: #fff;
+    text-align: center;
+    color: #b7bcb8;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+
+.aui-content-price-origin i {
+    margin-right: 3px;
+    font-family: arial;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.aui-content-price-origin span {
+    height: 20px;
+    background: #fff;
+    text-align: center;
+    color: #b7bcb8;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+
+.aui-content-box-ovf {
+    width: 763px;
+    overflow: hidden;
+    position: relative;
+    margin-left: 24px;
+    height: 275px;
+}
+
+.aui-content-box-list {
+    width: 6950px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.prev {
+    position: absolute;
+    left: 0px;
+    top: 50%;
+    margin-top: -40px;
+}
+
+.next {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -40px;
+}
+
+.prev a {
+    opacity: 0.6;
+    background: #2f3430;
+    position: absolute;
+    left: 0;
+    z-index: 100;
+    width: 24px;
+    height: 45px;
+}
+
+.next a {
+    background: #2f3430;
+    position: absolute;
+    right: 0;
+    z-index: 100;
+    width: 24px;
+    height: 45px;
+    opacity: 0.6;
+}
+
+.prev img {
+    width: 80%;
+    display: block;
+    border: none;
+    position: absolute;
+    left: 0;
+    top: 12px;
+}
+
+.next img {
+    width: 80%;
+    display: block;
+    position: absolute;
+    border: none;
+    top: 13px;
+    right: 0;
+}
+
+.prev a:hover {
+    opacity: 1;
+}
+
+.next a:hover {
+    opacity: 1;
+}
+
+.aui-content-max {
+    width: 1200px;
+    height: 275px;
+    background: #e83632;
+    margin: 0 auto;
+    position: relative;
+}
+
+.aui-sale-time {
+    position: relative;
+    float: left;
+    width: 190px;
+    height: 275px;
+    background: #e83632;
+    color: #fff;
+}
+
+.aui-sale-time-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+}
+
+.aui-sale-title {
+    position: absolute;
+    font-family: 'fzzxh';
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 32px;
+    font-size: 36px;
+}
+
+.aui-sale-second {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 90px;
+    color: #edac8e;
+    color: #f19999;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+}
+
+.aui-sale-icon-sd {
+    position: absolute;
+    left: 86px;
+    top: 126px;
+    display: block;
+    width: 20px;
+    height: 33px;
+    background-position: -35px -25px;
+    background-image: url(../img/icon-end.png);
+    background-position: -32.5px 0;
+    -moz-background-size: 52.5px 40px;
+    background-size: 52.5px 40px;
+}
+
+.aui-sale-ends {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 170px;
+    font-size: 16px;
+}
+
+.aui-sale-count {
+    position: absolute;
+    top: 212px;
+    left: 17px;
+    height: 40px;
+}
+
+.aui-sale-time-link:hover {
+    color: #fff;
+}
+
+.aui-sale-count-item {
+    position: relative;
+    float: left;
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    background-color: #2f3430;
+    margin-right: 5px;
+}
+
+.aui-sale-count-item span {
+    position: relative;
+    line-height: 40px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.aui-sale-count-item:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 50%;
+    height: 1px;
+    background: #e83632;
+}
+
+.aui-small-ad {
+    position: relative;
+    float: left;
+    width: 194px;
+    height: 275px;
+    background: #333;
+}
+
+.luara-left {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+}
+
+.luara-left ul {
+    position: relative;
+    padding: inherit;
+    margin: 0;
+}
+
+.luara-left ul li {
+    float: left;
+    padding: inherit;
+    margin: inherit;
+    list-style: none;
+}
+
+.luara-left ul li img {
+    width: 100%;
+    display: block;
+    border: none;
+}

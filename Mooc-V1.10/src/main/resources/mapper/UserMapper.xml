@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mooc.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.mooc.entity.User" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="vx" property="vx" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="mission" property="mission" jdbcType="VARCHAR" />
+    <result column="buycase" property="buycase" jdbcType="VARCHAR" />
+    <result column="mycase" property="mycase" jdbcType="VARCHAR" />
+    <result column="collect" property="collect" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="vip" property="vip" jdbcType="TIMESTAMP" />
+    <result column="fristtime" property="fristtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, phone, mail, vx, sex, nickname, username, password, mission, buycase, mycase, collect, 
+    education, vip,fristtime
+  </sql>
+  <!-- 查询所有用户 -->
+  <select id="selectAllUser" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+  <!-- 登录方法 -->
+   <select id="selectLoginUser" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where username = #{username} and password = #{password}
+  </select>
+    <select id="selectByUserName" resultType="int" parameterType="java.lang.String" >
+    select  count(1) as geshu
+    from user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mooc.entity.User" >
+    insert into user (id, phone, mail, 
+      vx, nickname, username, 
+      password, mission, buycase, 
+      mycase, collect, education, 
+      vip)
+    values (#{id,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, 
+      #{vx,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{mission,jdbcType=VARCHAR}, #{buycase,jdbcType=VARCHAR}, 
+      #{mycase,jdbcType=VARCHAR}, #{collect,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{vip,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mooc.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="vx != null" >
+        vx,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="mission != null" >
+        mission,
+      </if>
+      <if test="buycase != null" >
+        buycase,
+      </if>
+      <if test="mycase != null" >
+        mycase,
+      </if>
+      <if test="collect != null" >
+        collect,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="vip != null" >
+        vip,
+      </if>
+      
+        fristtime,
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="vx != null" >
+        #{vx,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="mission != null" >
+        #{mission,jdbcType=VARCHAR},
+      </if>
+      <if test="buycase != null" >
+        #{buycase,jdbcType=VARCHAR},
+      </if>
+      <if test="mycase != null" >
+        #{mycase,jdbcType=VARCHAR},
+      </if>
+      <if test="collect != null" >
+        500,
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null" >
+        #{vip,jdbcType=TIMESTAMP},
+      </if>
+      
+        now(),
+      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mooc.entity.User" >
+    update user
+    <set >
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="vx != null" >
+        vx = #{vx,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="mission != null" >
+        mission = #{mission,jdbcType=VARCHAR},
+      </if>
+      <if test="buycase != null" >
+        buycase = #{buycase,jdbcType=VARCHAR},
+      </if>
+      <if test="mycase != null" >
+        mycase = #{mycase,jdbcType=VARCHAR},
+      </if>
+      <if test="collect != null" >
+        collect = #{collect,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null" >
+        vip = #{vip,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mooc.entity.User" >
+    update user
+    set phone = #{phone,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      vx = #{vx,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      mission = #{mission,jdbcType=VARCHAR},
+      buycase = #{buycase,jdbcType=VARCHAR},
+      mycase = #{mycase,jdbcType=VARCHAR},
+      collect = #{collect,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      vip = #{vip,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
