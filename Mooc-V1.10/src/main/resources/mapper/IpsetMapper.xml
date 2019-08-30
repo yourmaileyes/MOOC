@@ -16,7 +16,7 @@
 <select id="select" resultMap="BaseResultMap">
     select *
     from ipset 
-    ORDER BY firsttime desc
+    ORDER BY totime desc
   </select>
   
   <select id="selectip" resultMap="BaseResultMap" parameterType="String">
