@@ -111,7 +111,7 @@ function nextpage(){
 	if(page>maxpage){
 		alert("这是最后一页！");
 	}else{ 
-	window.location.href="logpage?page="+page;
+	window.location.href="allip?page="+page;
     }
 	}
 
