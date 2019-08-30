@@ -20,7 +20,7 @@
     from review
     where courseid = #{courseid} ORDER BY time asc
   </select>
-  <select id="selectbyuserid" resultMap="BaseResultMap" parameterType="int" >
+  <select id="selectbyuserid" resultMap="BaseResultMap" parameterType="String" >
     select *
     from review
     where username = #{username} 
