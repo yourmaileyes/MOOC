@@ -7,15 +7,23 @@
 <html>
 <head>
 <meta charset="utf-8">
+  <link rel="stylesheet" href="style/css/login.css">
+<script src="style/js/login.js"></script>
+<link rel="stylesheet" href="style/css/amazeui.min.css">
+<link rel="stylesheet" href="style/css/course.css">
+<link rel="stylesheet" href="style/css/admin.css">
+<script src="style/js/loginandregist.js"></script>
+<script src="style/js/jquery-2.1.4.min.js"></script>
+<script src="style/js/amazeui.min.js"></script>
+<link rel="stylesheet" href="style/css/bootstrap.min.css">
 
-
-<link rel="stylesheet"
+<%-- <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/style/css/bootstrap.min.css">
 <script src="${pageContext.request.contextPath }/style/js/jquery.min.js"></script>
 <script
 	src="${pageContext.request.contextPath }/style/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/style/css/course.css">
+	href="${pageContext.request.contextPath }/style/css/course.css"> --%>
 <title>mooc</title>
 <!--[if lt IE 9]>  
 <script src="js/html5shiv.js"></script>  
@@ -33,62 +41,7 @@ body {
 
 <body>
 	<!--下面是顶部导航栏的代码-->
-	<nav class="navbar navbar-default navbar-inverse navbar-fixed-top"
-		role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="course">上课吧</a>
-		</div>
-
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="index">首页</a></li>
-				<li><a href="showvip">会员中心</a></li> 
-			</ul>
-			<form class="navbar-form navbar-left" action="coursesearch" method="post">
-
-				<input type="text" name="search" class="form-control" placeholder="课程" >
-				<button type="submit" class="btn">查找</button>
-			</form>
-			<ul class="nav navbar-nav navbar-right">
-
-				<c:if test="${loginUser != null }">
-					<li><a href="mylearn">我的学习 </a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"><c:if
-								test="${loginUser.nickname !=null}">
-								[${loginUser.nickname }]
-								</c:if> <c:if test="${loginUser.nickname ==null}">
-								[${loginUser.username }]
-								</c:if><strong class="caret"></strong></a>
-						<ul class="dropdown-menu">
-							<li><a href="infoset.jsp" class="glyphicon glyphicon-inbox">个人设置</a></li>
-							<li><a href="logout" class="glyphicon glyphicon-inbox">
-									退出帐号</a></li>
-
-						</ul></li>
-
-
-				</c:if>
-				<li><a href="#">关于 </a></li>
-				<c:if test="${loginUser == null }">
-					<li><a href="#" onclick="showloginbox()"><span
-							class="glyphicon glyphicon-log-in"></span> 登录</a></li>
-					<li><a href="#" onclick="showloginbox()"><span
-							class="glyphicon glyphicon-user"></span> 注册 </a></li>
-				</c:if>
-
-			</ul>
-		</div>
-	</div>
-	</nav>
+	<%@include file="head.jsp"%>
 	
 	<!-- <!—自适应布局-->
 	<div class="container-fluid" style="text-align: center;">

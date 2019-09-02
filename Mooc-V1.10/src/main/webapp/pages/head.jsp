@@ -91,7 +91,7 @@
 								[${loginUser.username }]
 								</c:if><strong class="caret"></strong></a>
 						<ul class="dropdown-menu">
-							<li><a href="infoset.jsp" class="glyphicon glyphicon-inbox">个人设置</a></li>
+							<li><a href="info" class="glyphicon glyphicon-inbox">个人设置</a></li>
 							<li><a href="logout" class="glyphicon glyphicon-inbox">
 									退出帐号</a></li>
 

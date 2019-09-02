@@ -291,6 +291,16 @@ public class UserController {
 		String result = i > 0 ? "true" : "false";
 		return result;
 	}
+	
+	@RequestMapping(value = "info")
+	//个人信息页面
+	public String Info(User user, HttpSession session) {
+		User loginUser = (User) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			return "login";
+		}
+		return "infoset";
+	}
 
 	@RequestMapping(value = "infoset")
 	// 个人信息设置
