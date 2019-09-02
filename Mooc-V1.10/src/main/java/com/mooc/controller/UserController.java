@@ -28,6 +28,7 @@ import com.mooc.biz.ReviewBiz;
 import com.mooc.biz.UserBiz;
 import com.mooc.entity.*;
 import com.mooc.util.DateUtil;
+import com.wf.captcha.utils.CaptchaUtil;
 
 @Controller
 public class UserController {
@@ -135,11 +136,10 @@ public class UserController {
 	public String insertUser(String varcode, User user, HttpSession session, HttpServletRequest req) {
 		String id = DateUtil.getId();
 		String username = user.getUsername();
-		String revarcode = (String) session.getAttribute("varcodenumber");
 		if (varcode == null) {
 			return "redirect:course";
 		}
-		if (userBiz.selectUser(username) == 1 || !varcode.equals(revarcode)) {
+		if (userBiz.selectUser(username) == 1 || !CaptchaUtil.ver(varcode, req)) {
 			return "redirect:course";
 		}
 		user.setId(id);
@@ -158,11 +158,10 @@ public class UserController {
 	public String regist(String varcode, User user, HttpSession session, HttpServletRequest req) {
 		String id = DateUtil.getId();
 		String username = user.getUsername();
-		String revarcode = (String) session.getAttribute("varcodenumber");
 		if (varcode == null) {
 			return "redirect:course";
 		}
-		if (userBiz.selectUser(username) == 1 || !varcode.equals(revarcode)) {
+		if (userBiz.selectUser(username) == 1 || !CaptchaUtil.ver(varcode, req)) {
 			return "redirect:course";
 		}
 		user.setId(id);
@@ -302,7 +301,7 @@ public class UserController {
 		}
 		user.setCollect(loginUser.getCollect());
 		List<Review> reviews = reviewBiz.selectbyuserid(loginUser.getUsername());
-		for (int a = 0; a < reviews.size(); a++) {
+		for (int a = 0; a < reviews.size(); a++) {//个人信息修改的同时更新评论的用户信息
 			reviews.get(a).setSex(user.getSex());
 		}
 		reviewBiz.updateByPrimaryKeySelective(reviews);

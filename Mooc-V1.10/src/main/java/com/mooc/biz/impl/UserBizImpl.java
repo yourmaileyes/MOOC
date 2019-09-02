@@ -40,6 +40,9 @@ public class UserBizImpl implements UserBiz{
 	@Override
 	public int updateByPrimaryKeySelective(User record) {
 		// TODO Auto-generated method stub
+		if(record.getCollect()== 0) {
+			record.setCollect(userMapper.selectByPrimaryKey(record.getId()).getCollect());
+		}
 		return userMapper.updateByPrimaryKeySelective(record);
 	}
 	@Override
