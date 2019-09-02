@@ -209,6 +209,7 @@ public class AdminController {
 	@RequestMapping(value = "setuser")//修改账户
 	public String setuser(User user,HttpSession session,HttpServletRequest req){
 		User loginUser = (User) session.getAttribute("loginUser");
+		user.setCollect(userBiz.selectByPrimaryKey(user.getId()).getCollect());
 		userBiz.updateByPrimaryKeySelective(user);
 		setlog(user,req.getRemoteAddr(),"修改用户信息",loginUser.getUsername());
 		return "redirect:alluser?page=0";
