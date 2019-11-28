@@ -5,7 +5,10 @@
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 <br>
-项目演示地址：http://49.235.80.156 (演示地址不提供管理员演示)<br>
+项目演示地址：http://49.235.80.156<br>
+项目后台演示地址：http://49.235.80.156/admin<br>
+管理员账户：admin<br>
+管理员密码：admin<br>
 MoocV1.01为SSM框架 MoocV1.10为spring boot框架<br>
 1)登录模块
 在进入系统首页后，首先看到的是登录界面，该界面会提供注册用户的功能，在登录界面，输入用户名之后，
@@ -38,7 +41,11 @@ MoocV1.01为SSM框架 MoocV1.10为spring boot框架<br>
 2019.8.30更新<br>
 ---------------------MOOC V1.11更新----------------------------------<br>
 1.修改有关验证码注册以及验证相关BUG。<br>
-2019.9.2更新
+2019.9.2更新<br>
+---------------------MOOC V1.12更新----------------------------------<br>
+1.优化所有控制层代码以及业务流程。<br>
+2.添加用户mission属性为showadmin的展示管理员功能。<br>
+2019.11.28更新<br>
 
 ![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/1.png)
 
