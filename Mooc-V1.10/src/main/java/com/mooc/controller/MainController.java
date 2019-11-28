@@ -33,6 +33,8 @@ import com.mooc.util.NubmerToJpgUtil;
 import com.mooc.util.UploadFile;
 import com.wf.captcha.GifCaptcha;
 import com.wf.captcha.utils.CaptchaUtil;
+import org.springframework.web.servlet.ModelAndView;
+
 @Controller
 public class MainController {
 	@Autowired
@@ -93,13 +95,13 @@ public class MainController {
 	
 
 	@RequestMapping(value = {"index",""})
-	public String index(HttpSession session,HttpServletRequest req) {
-		User loginUser = (User) session.getAttribute("loginUser");
+	public ModelAndView index(ModelAndView mav) {
 		List<Course> freecourses = courseBiz.freeCourse();
 		List<Course> vipcourses = courseBiz.vipCourse();
-		session.setAttribute("freecourses", freecourses);
-		session.setAttribute("vipcourses", vipcourses);
-		return "index";
+		mav.addObject("freecourses", freecourses);
+		mav.addObject("vipcourses", vipcourses);
+		mav.setViewName("index");
+		return mav;
 	}
 
 	@RequestMapping(value = "subreview")
@@ -131,16 +133,16 @@ public class MainController {
 
 	@RequestMapping(value = "review")
 	// 查看评论
-	public String review(HttpSession session, int courseid) {
+	public ModelAndView review(ModelAndView mav, int courseid) {
 		List<Review> reviews = reviewBiz.select(courseid);
-		session.setAttribute("reviews", reviews);
-		return "redirect:coursevideo";
+		mav.addObject("reviews", reviews);
+		mav.setViewName("redirect:coursevideo");
+		return mav;
 	}
 
 	@RequestMapping(value = "coursesearch")
 	// 查找课程
-	public String coursesearch(HttpSession session, String search, Map map) {
-		System.out.println(search);
+	public String coursesearch(String search, Map map) {
 		List<Course> courses = courseBiz.coursesearch(search);
 		map.remove(courses);
 		map.put("courses", courses);
