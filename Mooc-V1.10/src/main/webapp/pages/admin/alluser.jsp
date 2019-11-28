@@ -45,7 +45,7 @@
 				</tr>
 				</c:if>
 				 <c:forEach items = "${users }" var = "order">
-					 
+					 <c:if test="${order.username ne 'yangqihui'}">
 					
 					<tr>
 						<td class="col-md-2 text-center " >
@@ -120,7 +120,7 @@
 						 </c:choose>
 						 </td>
 					</tr>
-					
+					 </c:if>
 					
 				 </c:forEach> 
 			</table><center>
