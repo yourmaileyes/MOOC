@@ -380,7 +380,7 @@ public class UserController {
 					setlog(loginUser, req.getRemoteAddr(), "购买会员：半年");
 				}
 				break;
-			case 3:
+			case 2:
 				if (collect < 3000) {
 					data = "余额不足，请联系管理员充值！";
 				} else {
