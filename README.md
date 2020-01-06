@@ -5,8 +5,8 @@
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 <br>
-项目演示地址：http://49.235.80.156<br>
-项目后台演示地址：http://49.235.80.156/admin<br>
+项目演示地址：http://www.ccnoobs.top<br>
+项目后台演示地址：http://www.ccnoobs.top/admin<br>
 管理员账户：admin<br>
 管理员密码：admin<br>
 MoocV1.01为SSM框架 MoocV1.10为spring boot框架<br>
