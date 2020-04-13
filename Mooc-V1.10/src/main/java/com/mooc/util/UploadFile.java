@@ -15,6 +15,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.mooc.entity.Course;
+import org.apache.commons.fileupload.servlet.ServletRequestContext;
+
 /**
  * 文件上传包装类
  * jpg文件与其他文件分开存放
@@ -91,7 +93,7 @@ public class UploadFile {
 	        try {
 	            // 解析请求的内容提取文件数据
 	            @SuppressWarnings("unchecked")
-	            List<FileItem> formItems = upload.parseRequest(request);
+	            List<FileItem> formItems = upload.parseRequest(new ServletRequestContext(request));
 	 
 	            if (formItems != null && formItems.size() > 0) {
 	                // 迭代表单数据
