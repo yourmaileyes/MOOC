@@ -47,6 +47,9 @@ MoocV1.01为SSM框架 MoocV1.10为spring boot框架<br>
 1.优化所有控制层代码以及业务流程。<br>
 2.添加用户mission属性为showadmin的展示管理员功能。<br>
 2019.11.28更新<br>
+---------------------MOOC V1.13更新----------------------------------<br>
+1.修复课程管理失效相关问题，具体修改原因和修改过程在我的论坛上已发布。<br>
+2020.4.13更新<br>
 
 ![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/1.png)
 
