@@ -34,6 +34,7 @@ import com.mooc.entity.Ipset;
 import com.mooc.entity.Log;
 import com.mooc.entity.User;
 import com.mooc.util.DateUtil;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AdminController {
@@ -60,7 +61,7 @@ public class AdminController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {
 			return "login"; 
-		}else if(!"admin".equals(loginUser.getMission())){
+		}else if(!"admin".equals(loginUser.getMission())&&!"showadmin".equals(loginUser.getMission())){
 			//添加管理员的再次验证
 		session.setAttribute("loginUser", loginUser);
 		return "redirect:course";
@@ -77,7 +78,7 @@ public class AdminController {
 		User loginUser = userBiz.selectLoginUser(paramMap);
 		if (loginUser == null) {
 			return "login"; 
-		}else if(!"admin".equals(loginUser.getMission())){
+		}else if(!"admin".equals(loginUser.getMission())&&!"showadmin".equals(loginUser.getMission())){
 			//添加管理员登录的再次验证，防止直接跳过前端验证进行强制登录
 		session.setAttribute("loginUser", loginUser);
 		Log log = new Log();
@@ -95,31 +96,34 @@ public class AdminController {
 		}
 	}
 	@RequestMapping(value = "alluser")//展示所有用户
-	public String alluser(int page, HttpSession session) {
+	public ModelAndView alluser(ModelAndView mav, int page, HttpSession session) {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {
-			return "login"; 
-		}else if(!"admin".equals(loginUser.getMission())){
+			mav.setViewName("login");
+			return mav;
+		}else if(!"admin".equals(loginUser.getMission())&&!"showadmin".equals(loginUser.getMission())){
 			//添加管理员的再次验证
-		session.setAttribute("loginUser", loginUser);
-		return "redirect:course";
+			mav.setViewName("redirect:course");
+			return mav;
 		}else{
 			List<User> userss = userBiz.selectAllUser();
 			int totalpage = 14;//一页的数量
 			List<User> users = new ArrayList<User>();
-			session.setAttribute("maxpage", (userss.size()-1)/totalpage);
+			mav.addObject("maxpage", (userss.size()-1)/totalpage);
 			for(int i = page*totalpage;i<page*totalpage+totalpage;i++){
 				if(userss.size()==i){
-					session.setAttribute("users", users);
-					session.setAttribute("page", page);
-					return "admin/alluser";
+					mav.addObject("users", users);
+					mav.addObject("page", page);
+					mav.setViewName("admin/alluser");
+					return mav;
 				}
 				users.add(userss.get(i));
 			}
-			session.setAttribute("page", page);
-		    session.setAttribute("loginUser", loginUser);
-		    session.setAttribute("users", users);
-		    return "admin/alluser";
+			mav.addObject("page", page);
+			mav.addObject("loginUser", loginUser);
+			mav.addObject("users", users);
+			mav.setViewName("admin/alluser");
+		    return mav;
 		
 		}
 	}
@@ -156,7 +160,7 @@ public class AdminController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {
 			return "login"; 
-		}else if(!"admin".equals(loginUser.getMission())){
+		}else if(!"admin".equals(loginUser.getMission())&&!"showadmin".equals(loginUser.getMission())){
 			//添加管理员的再次验证
 		return "redirect:course";
 		}
@@ -171,7 +175,7 @@ public class AdminController {
 		User user = userBiz.selectByPrimaryKey(userid);
 		if(user==null){
 			pw.print("用户ID不存在！请核实后再充值");
-		}else if(!paypassword.equals("591284209")){
+		}else if(!paypassword.equals("lixinxin0818")){
 			pw.print("0");
 		}else{
 			user.setCollect(user.getCollect()+collect);
@@ -185,7 +189,7 @@ public class AdminController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {
 			return "login"; 
-		}else if(!"admin".equals(loginUser.getMission())){
+		}else if(!"admin".equals(loginUser.getMission())&&!"showadmin".equals(loginUser.getMission())){
 			//添加管理员的再次验证
 		return "redirect:course";
 		}
@@ -201,6 +205,12 @@ public class AdminController {
 	@RequestMapping(value = "newadduser")//新建账户
 	public String newadduser(User newuser,HttpSession session,HttpServletRequest req){
 		User loginUser = (User) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			return "login";
+		}else if(!"admin".equals(loginUser.getMission())){
+			//添加管理员的再次验证
+			return "redirect:course";
+		}
 		newuser.setId(DateUtil.getId());
 		userBiz.insertSelective(newuser);
 		setlog(newuser,req.getRemoteAddr(),"创建用户",loginUser.getUsername());
@@ -209,6 +219,12 @@ public class AdminController {
 	@RequestMapping(value = "setuser")//修改账户
 	public String setuser(User user,HttpSession session,HttpServletRequest req){
 		User loginUser = (User) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			return "login";
+		}else if(!"admin".equals(loginUser.getMission())){
+			//添加管理员的再次验证
+			return "redirect:course";
+		}
 		user.setCollect(userBiz.selectByPrimaryKey(user.getId()).getCollect());
 		userBiz.updateByPrimaryKeySelective(user);
 		setlog(user,req.getRemoteAddr(),"修改用户信息",loginUser.getUsername());
@@ -220,7 +236,7 @@ public class AdminController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		resp.setCharacterEncoding("utf-8");
 		PrintWriter pw = resp.getWriter();
-		if(!removepassword.equals("591284209")){
+		if(!removepassword.equals("lixinxin0818")){
 			pw.print("0");
 		}else{
 			User user = userBiz.selectByPrimaryKey(userid);
@@ -235,13 +251,14 @@ public class AdminController {
 	public String showlog(String seachusername,String type, HttpSession session) {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {
-			return "login"; 
-		}else if(!"admin".equals(loginUser.getMission())){
+			return "login";
+		}else if(!"admin".equals(loginUser.getMission())&&!"showadmin".equals(loginUser.getMission())){
 			//添加管理员的再次验证
 		return "redirect:course";
 		}
+		List<Log> logs;
 		if(seachusername!=null&&type==null){
-			List<Log> logs = logBiz.selectbyusername(seachusername);
+			logs = logBiz.selectbyusername(seachusername);
 			session.setAttribute("logss", logs);
 			session.removeAttribute("type");
 			session.setAttribute("logs", initlogpage(logs));
@@ -250,7 +267,7 @@ public class AdminController {
 			return "admin/log";
 		}
 		if(type!=null&&seachusername==null){
-			List<Log> logs = logBiz.selectadminlog();
+			logs = logBiz.selectadminlog();
 			session.setAttribute("type", "admin");
 			session.setAttribute("logss", logs);
 			session.setAttribute("logs", initlogpage(logs));
@@ -258,8 +275,16 @@ public class AdminController {
 			session.setAttribute("page", 0);
 			return "admin/log";
 		}
-		if(type==null&&seachusername==null){
-			List<Log> logs = logBiz.select();
+		if(type==null){
+			logs = logBiz.select();
+			session.removeAttribute("type");
+		    session.setAttribute("logss", logs);
+		    session.setAttribute("logs", initlogpage(logs));
+		    session.setAttribute("maxpage", (logs.size()-1)/15);
+		    session.setAttribute("page", 0);
+		    return "admin/log";
+		} else {
+		    logs = logBiz.selectadminlogbyusername(seachusername);
 			session.removeAttribute("type");
 		    session.setAttribute("logss", logs);
 		    session.setAttribute("logs", initlogpage(logs));
@@ -267,22 +292,6 @@ public class AdminController {
 		    session.setAttribute("page", 0);
 		    return "admin/log";
 		}
-		if(type!=null&&seachusername!=null){
-		    List<Log> logs = logBiz.selectadminlogbyusername(seachusername);
-			session.removeAttribute("type");
-		    session.setAttribute("logss", logs);
-		    session.setAttribute("logs", initlogpage(logs));
-		    session.setAttribute("maxpage", (logs.size()-1)/15);
-		    session.setAttribute("page", 0);
-		    return "admin/log";
-		}
-		List<Log> logs = logBiz.select();
-		session.removeAttribute("type");
-	    session.setAttribute("logss", logs);
-	    session.setAttribute("logs", initlogpage(logs));
-		session.setAttribute("maxpage", (logs.size()-1)/15);
-	    session.setAttribute("page", 0);
-	    return "admin/log";
 	}
 	
 	public List<Log> initlogpage(List<Log> logss){//第一次传输日志
@@ -320,7 +329,7 @@ public class AdminController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {
 			return "login"; 
-		}else if(!"admin".equals(loginUser.getMission())){
+		}else if(!"admin".equals(loginUser.getMission())&&!"showadmin".equals(loginUser.getMission())){
 			//添加管理员的再次验证
 		return "redirect:course";
 		}
@@ -347,7 +356,7 @@ public class AdminController {
 		int page = (int) session.getAttribute("page");
 		if (loginUser == null) {
 			return "login"; 
-		}else if(!"admin".equals(loginUser.getMission())){
+		}else if(!"admin".equals(loginUser.getMission())&&!"showadmin".equals(loginUser.getMission())){
 			//添加管理员的再次验证
 		return "redirect:course";
 		}
@@ -373,15 +382,9 @@ public class AdminController {
 	@RequestMapping(value = "deletecourse")//删除课程
 	public void deletecourse(int courseid, String removepassword,HttpSession session,HttpServletRequest req,HttpServletResponse resp) throws IOException {
 		User loginUser = (User) session.getAttribute("loginUser");
-		if (loginUser == null) {
-			return; 
-		}else if(!"admin".equals(loginUser.getMission())){
-			//添加管理员的再次验证
-		return;
-		}
 		resp.setCharacterEncoding("utf-8");
 		PrintWriter pw = resp.getWriter();
-		if(!removepassword.equals("591284209")){
+		if(!removepassword.equals("lixinxin0818")){
 			pw.print("0");
 		}else{
 			Course course = courseBiz.selectByPrimaryKey(courseid);
@@ -401,7 +404,7 @@ public class AdminController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {
 			return "login"; 
-		}else if(!"admin".equals(loginUser.getMission())){
+		}else if(!"admin".equals(loginUser.getMission())&&!"showadmin".equals(loginUser.getMission())){
 			//添加管理员的再次验证
 		session.setAttribute("loginUser", loginUser);
 		return "redirect:course";
@@ -438,6 +441,13 @@ public class AdminController {
 	}
 	@RequestMapping(value="banip")//封禁ip
 	public void banip(HttpServletResponse resp,HttpSession session,String ip,String mark,String time) throws IOException{
+		User loginUser = (User) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			return ;
+		}else if(!"admin".equals(loginUser.getMission())){
+			//添加管理员的再次验证
+			return ;
+		}
 		Date date = new Date();
 		Ipset ip1 = ipsetBiz.selectip(ip);
 		boolean isnull = false;
@@ -449,29 +459,36 @@ public class AdminController {
 		ip1.setIp(ip);
 		ip1.setMark(mark);
 		ip1.setType("1");
-		if(time.equals("5m")) {
-			if(date.getMinutes()>55) {
-				date.setMinutes(date.getMinutes()-55);
-				date.setHours(date.getHours()+1);
-			}else {
-			date.setMinutes(date.getMinutes()+5);
-			}
-			ip1.setBantime(date);
-		}else if(time.equals("2h")) {
-			date.setHours(date.getHours()+2);
-			ip1.setBantime(date);
-		}else if(time.equals("1d")) {
-			date.setDate(date.getDate()+1);
-			ip1.setBantime(date);
-		}else if(time.equals("1m")) {
-			date.setMonth(date.getMonth()+1);
-			ip1.setBantime(date);
-		}else if(time.equals("1y")) {
-			date.setYear(date.getYear()+1);
-			ip1.setBantime(date);
-		}else if(time.equals("ever")) {
-			date.setYear(date.getYear()+99);
-			ip1.setBantime(date);
+		switch (time) {
+			case "5m":
+				if (date.getMinutes() > 55) {
+					date.setMinutes(date.getMinutes() - 55);
+					date.setHours(date.getHours() + 1);
+				} else {
+					date.setMinutes(date.getMinutes() + 5);
+				}
+				ip1.setBantime(date);
+				break;
+			case "2h":
+				date.setHours(date.getHours() + 2);
+				ip1.setBantime(date);
+				break;
+			case "1d":
+				date.setDate(date.getDate() + 1);
+				ip1.setBantime(date);
+				break;
+			case "1m":
+				date.setMonth(date.getMonth() + 1);
+				ip1.setBantime(date);
+				break;
+			case "1y":
+				date.setYear(date.getYear() + 1);
+				ip1.setBantime(date);
+				break;
+			case "ever":
+				date.setYear(date.getYear() + 99);
+				ip1.setBantime(date);
+				break;
 		}
 		if(isnull) {
 			ipsetBiz.insert(ip1);
@@ -495,7 +512,7 @@ public class AdminController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {
 			return "login"; 
-		}else if(!"admin".equals(loginUser.getMission())){
+		}else if(!"admin".equals(loginUser.getMission())&&!"showadmin".equals(loginUser.getMission())){
 			//添加管理员的再次验证
 		return "redirect:course";
 		}

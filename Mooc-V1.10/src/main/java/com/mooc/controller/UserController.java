@@ -29,6 +29,7 @@ import com.mooc.biz.UserBiz;
 import com.mooc.entity.*;
 import com.mooc.util.DateUtil;
 import com.wf.captcha.utils.CaptchaUtil;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
@@ -93,7 +94,7 @@ public class UserController {
 	 * ajax密码检查
 	 */
 	@RequestMapping(value = "passwordcheck")
-	public void selectUser(User user, HttpSession session, HttpServletResponse response, HttpServletRequest req)
+	public void selectUser(User user, HttpServletResponse response, HttpServletRequest req)
 			throws IOException {
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("username", user.getUsername());
@@ -101,9 +102,10 @@ public class UserController {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		if (userBiz.selectUser(paramMap) == 1) {
-			if (!"admin".equals(userBiz.selectLoginUser(paramMap).getMission())) {
-				if (userBiz.selectLoginUser(paramMap).getBuycase() != null) {
-					if ("1".equals(userBiz.selectLoginUser(paramMap).getBuycase())) {
+			user = userBiz.selectLoginUser(paramMap);
+			if (!"admin".equals(user.getMission())&&!"showadmin".equals(user.getMission())) {
+				if (user.getBuycase() != null) {
+					if ("1".equals(user.getBuycase())) {
 						out.println("3");// 屏蔽登录
 					} else
 						out.println("1");// 正常登录密码正确
@@ -133,14 +135,15 @@ public class UserController {
 
 	@RequestMapping(value = "quickregist")
 	// 快速注册
-	public String insertUser(String varcode, User user, HttpSession session, HttpServletRequest req) {
+	public ModelAndView insertUser(String varcode, User user, HttpSession session, HttpServletRequest req, ModelAndView mav) {
 		String id = DateUtil.getId();
 		String username = user.getUsername();
+		mav.setViewName("redirect:course");
 		if (varcode == null) {
-			return "redirect:course";
+			return mav;
 		}
 		if (userBiz.selectUser(username) == 1 || !CaptchaUtil.ver(varcode, req)) {
-			return "redirect:course";
+			return mav;
 		}
 		user.setId(id);
 		user.setMission(null);
@@ -150,19 +153,20 @@ public class UserController {
 		userBiz.insertSelective(user);
 		session.setAttribute("loginUser", user);
 		setlog(user, req.getRemoteAddr(), "快速注册");
-		return "redirect:course";
+		return mav;
 	}
 
 	@RequestMapping(value = "regist")
 	// 注册
-	public String regist(String varcode, User user, HttpSession session, HttpServletRequest req) {
+	public ModelAndView regist(ModelAndView mav, String varcode, User user, HttpSession session, HttpServletRequest req) {
 		String id = DateUtil.getId();
 		String username = user.getUsername();
+		mav.setViewName("redirect:course");
 		if (varcode == null) {
-			return "redirect:course";
+			return mav;
 		}
 		if (userBiz.selectUser(username) == 1 || !CaptchaUtil.ver(varcode, req)) {
-			return "redirect:course";
+			return mav;
 		}
 		user.setId(id);
 		user.setMission(null);
@@ -171,26 +175,28 @@ public class UserController {
 		user.setVip(null);
 		userBiz.insertSelective(user);
 		setlog(user, req.getRemoteAddr(), "普通注册");
-		return "redirect:course";
+		return mav;
 	}
 
 	@RequestMapping(value = "showvip")
 	// 会员中心
-	public String showvip(HttpSession session) {
+	public ModelAndView showvip(HttpSession session,ModelAndView mav) {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser != null) {
 			loginUser = userBiz.selectByPrimaryKey(loginUser.getId());
 			session.setAttribute("loginUser", loginUser);
 		}
-		return "vip";
+		mav.setViewName("vip");
+		return mav;
 	}
 
 	@RequestMapping(value = "mylearn")
 	// 我的课程查询
-	public String myCourse(HttpSession session, Map map) {
+	public ModelAndView myCourse(HttpSession session, ModelAndView mav) {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {
-			return "login";
+			mav.setViewName("login");
+			return mav;
 		}
 		List<Course> courses = new ArrayList<Course>();
 		List<Message> messages = messageBiz.selectmy(loginUser.getId());
@@ -199,8 +205,9 @@ public class UserController {
 			Course course = courseBiz.selectByPrimaryKey(a);
 			courses.add(course);
 		}
-		map.put("mycourses", courses);
-		return "mylearn";
+		mav.addObject("mycourses", courses);
+		mav.setViewName("mylearn");
+		return mav;
 
 	}
 
@@ -215,23 +222,25 @@ public class UserController {
 
 	@RequestMapping(value = "coursedetail")
 	// 单课程主页
-	public String Courseindex(int id, HttpSession session, Map map) {
+	public ModelAndView Courseindex(int id, HttpSession session,ModelAndView mav) {
 		User loginUser = (User) session.getAttribute("loginUser");
 		if (loginUser == null) {
-			return "login";
+			mav.setViewName("login");
+			return mav;
 		}
 		Message message = new Message();
 		message.setCourseid(id);
 		message.setUserid(loginUser.getId());
 		Message me = messageBiz.select(message);
 		if (me == null) {
-			map.put("isSelect", false);
+			mav.addObject("isSelect", false);
 		} else {
-			map.put("isSelect", true);
+			mav.addObject("isSelect", true);
 		}
 		Course course = courseBiz.selectByPrimaryKey(id);
-		map.put("course", course);
-		return "coursedetail";
+		mav.addObject("course", course);
+		mav.setViewName("coursedetail");
+		return mav;
 
 	}
 
@@ -338,84 +347,53 @@ public class UserController {
 		List<Review> reviews = reviewBiz.selectbyuserid(loginUser.getUsername());
 		int collect = loginUser.getCollect();
 		boolean isvip = false;
-		boolean is = true;
 		Date date = new Date();
 		Date vipdate = loginUser.getVip();
-		if (vipdate == null) {
-			is = false;
-		} else if (vipdate.getTime() > date.getTime()) {
-			is = false;
+		if (vipdate == null||vipdate.getTime() < date.getTime()) {
+			loginUser.setVip(new Date());
 		}
-		if (vipdate == null || is) {
-			if (viptype == 0) {
+		switch (viptype){
+			default:
+				data = "请求错误！";
+				break;
+			case 0:
 				if (collect < 500) {
 					data = "余额不足，请联系管理员充值！";
 				} else {
 					loginUser.setCollect(collect - 500);
-					vipdate = new Date();
+					vipdate = loginUser.getVip();
 					vipdate.setMonth(vipdate.getMonth() + 1);
 					loginUser.setVip(vipdate);
 					isvip = true;
 					setlog(loginUser, req.getRemoteAddr(), "购买会员：一个月");
 				}
-			} else if (viptype == 1) {
-				if (Integer.valueOf(loginUser.getCollect()) < 2000) {
-					data = "余额不足，请联系管理员充值！";
-				} else {
-					loginUser.setCollect(collect - 2000);
-					vipdate = new Date();
-					vipdate.setMonth(vipdate.getMonth() + 6);
-					loginUser.setVip(vipdate);
-					isvip = true;
-					setlog(loginUser, req.getRemoteAddr(), "购买会员：半年");
-				}
-			} else if (viptype == 2) {
-				if (collect < 3000) {
-					data = "余额不足，请联系管理员充值！";
-				} else {
-					loginUser.setCollect(collect - 3000);
-					vipdate = new Date();
-					vipdate.setYear(vipdate.getYear() + 1);
-					loginUser.setVip(vipdate);
-					isvip = true;
-					setlog(loginUser, req.getRemoteAddr(), "购买会员：一年");
-				}
-			}
-		} else {
-			if (viptype == 0) {
-				if (collect < 500) {
-					data = "余额不足，请联系管理员充值！";
-				} else {
-					loginUser.setCollect(collect - 500);
-					vipdate.setMonth(vipdate.getMonth() + 1);
-					loginUser.setVip(vipdate);
-					isvip = true;
-					setlog(loginUser, req.getRemoteAddr(), "购买会员：一个月");
-				}
-			} else if (viptype == 1) {
+				break;
+			case 1:
 				if (collect < 2000) {
 					data = "余额不足，请联系管理员充值！";
 				} else {
 					loginUser.setCollect(collect - 2000);
+					vipdate = loginUser.getVip();
 					vipdate.setMonth(vipdate.getMonth() + 6);
 					loginUser.setVip(vipdate);
 					isvip = true;
 					setlog(loginUser, req.getRemoteAddr(), "购买会员：半年");
 				}
-			} else if (viptype == 2) {
+				break;
+			case 2:
 				if (collect < 3000) {
 					data = "余额不足，请联系管理员充值！";
 				} else {
 					loginUser.setCollect(collect - 3000);
+					vipdate = loginUser.getVip();
 					vipdate.setYear(vipdate.getYear() + 1);
 					loginUser.setVip(vipdate);
 					isvip = true;
 					setlog(loginUser, req.getRemoteAddr(), "购买会员：一年");
 				}
-			}
-
+				break;
 		}
-		if (isvip = true) {
+		if (isvip) {
 			for (int a = 0; a < reviews.size(); a++) {
 				reviews.get(a).setVip(1);
 			}
