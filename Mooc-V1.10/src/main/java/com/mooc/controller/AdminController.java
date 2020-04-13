@@ -175,7 +175,7 @@ public class AdminController {
 		User user = userBiz.selectByPrimaryKey(userid);
 		if(user==null){
 			pw.print("用户ID不存在！请核实后再充值");
-		}else if(!paypassword.equals("lixinxin0818")){
+		}else if(!paypassword.equals("591284209")){
 			pw.print("0");
 		}else{
 			user.setCollect(user.getCollect()+collect);
@@ -236,7 +236,7 @@ public class AdminController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		resp.setCharacterEncoding("utf-8");
 		PrintWriter pw = resp.getWriter();
-		if(!removepassword.equals("lixinxin0818")){
+		if(!removepassword.equals("591284209")){
 			pw.print("0");
 		}else{
 			User user = userBiz.selectByPrimaryKey(userid);
@@ -384,7 +384,7 @@ public class AdminController {
 		User loginUser = (User) session.getAttribute("loginUser");
 		resp.setCharacterEncoding("utf-8");
 		PrintWriter pw = resp.getWriter();
-		if(!removepassword.equals("lixinxin0818")){
+		if(!removepassword.equals("591284209")){
 			pw.print("0");
 		}else{
 			Course course = courseBiz.selectByPrimaryKey(courseid);
