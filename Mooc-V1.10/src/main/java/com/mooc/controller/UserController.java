@@ -178,6 +178,18 @@ public class UserController {
 		return mav;
 	}
 
+	@RequestMapping(value = "registerPage")
+	// 注册
+	public ModelAndView registerPage(ModelAndView mav, String varcode, User user, HttpSession session, HttpServletRequest req) {
+		User loginUser = (User) session.getAttribute("loginUser");
+		mav.setViewName("regist");
+		if (loginUser == null) {
+			return mav;
+		}
+		mav.setViewName("redirect:course");
+		return mav;
+	}
+
 	@RequestMapping(value = "showvip")
 	// 会员中心
 	public ModelAndView showvip(HttpSession session,ModelAndView mav) {
