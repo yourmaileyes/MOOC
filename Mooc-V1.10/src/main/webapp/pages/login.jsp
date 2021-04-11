@@ -29,7 +29,7 @@
 					style="border: 0px solid transparent !important;">
 				<ul class="nav navbar-nav" style="width: auto; margin-left: 490px;">
 					<li class="active"><a href="#" style="font-size: 20px;">登录</a></li>
-					<li><a href="regist" style="font-size: 20px;">注册</a></li>
+					<li><a href="registerPage" style="font-size: 20px;">注册</a></li>
 
 				</ul>
 				</nav>

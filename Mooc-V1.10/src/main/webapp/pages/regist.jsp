@@ -160,7 +160,7 @@
 
 
 				<ul class="nav navbar-nav" style="width: auto; margin-left: 490px;">
-					<li><a href="login.jsp" style="font-size: 20px;">登录</a></li>
+					<li><a href="login" style="font-size: 20px;">登录</a></li>
 					<li class="active"><a href="#" style="font-size: 20px;">注册</a></li>
 
 				</ul>
