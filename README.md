@@ -10,6 +10,8 @@
 项目后台演示地址：http://mooc.ccnoobs.top/admin<br>
 管理员账户：admin<br>
 管理员密码：admin<br>
+更多项目请访问我的仓库:https://github.com/yourmaileyes?tab=repositories<br>
+承接原生开发项目<br>
 MoocV1.01为SSM框架 MoocV1.10为spring boot框架<br>
 1)登录模块
 在进入系统首页后，首先看到的是登录界面，该界面会提供注册用户的功能，在登录界面，输入用户名之后，
