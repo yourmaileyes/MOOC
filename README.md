@@ -55,6 +55,9 @@ MoocV1.01为SSM框架 MoocV1.10为spring boot框架<br>
 ---------------------MOOC V1.14更新----------------------------------<br>
 1.MOOC V1.14更新-修复注册页面访问失败的问题。<br>
 2021.4.11更新<br>
+---------------------MOOC V1.15更新----------------------------------<br>
+1.MOOC V1.15更新-修复会员过期问题。<br>
+2021.4.25更新<br>
 
 ![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/1.png)
 

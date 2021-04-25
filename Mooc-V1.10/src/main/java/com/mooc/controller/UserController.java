@@ -70,6 +70,10 @@ public class UserController {
 			return "login";
 		}
 		setlog(loginUser, req.getRemoteAddr(), "登录");
+		if (loginUser.getVip().getTime()<new Date().getTime()){
+			loginUser.setVip(null);
+			userBiz.updateByPrimaryKeySelective(loginUser);
+		}
 		session.setAttribute("loginUser", loginUser);
 		return "redirect:course";
 	}
