@@ -20,7 +20,10 @@
   </select>
   <delete id="delete" parameterType="com.mooc.entity.Message" >
     delete from message
-    where courseid = #{courseid,jdbcType=INTEGER} and userid = #{userid}
+    where courseid = #{courseid,jdbcType=INTEGER}
+    <if test="userid !=null">
+      and userid = #{userid}
+    </if>
   </delete>
   <insert id="insert" parameterType="com.mooc.entity.Message" >
     insert into message (courseid, userid)

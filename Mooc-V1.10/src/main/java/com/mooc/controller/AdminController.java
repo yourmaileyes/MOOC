@@ -19,20 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mooc.biz.*;
+import com.mooc.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.mooc.biz.CourseBiz;
-import com.mooc.biz.IpsetBiz;
-import com.mooc.biz.LogBiz;
-import com.mooc.biz.UserBiz;
-import com.mooc.entity.Course;
-import com.mooc.entity.Ipset;
-import com.mooc.entity.Log;
-import com.mooc.entity.User;
 import com.mooc.util.DateUtil;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,6 +40,8 @@ public class AdminController {
 	CourseBiz courseBiz;
 	@Autowired
 	IpsetBiz ipsetBiz;
+	@Autowired
+	MessageBiz messageBiz;
 	public void setlog(User loginUser,String ip,String type,String adminname){
 		Log log = new Log();
 		log.setUserid(loginUser.getId());
@@ -389,6 +385,9 @@ public class AdminController {
 		}else{
 			Course course = courseBiz.selectByPrimaryKey(courseid);
 			courseBiz.deleteByPrimaryKey(String.valueOf(courseid));
+			Message message = new Message();
+			message.setCourseid(courseid);
+			messageBiz.delete(message);
 			Log log = new Log();
 			log.setId(courseid);
 			log.setExecutor(loginUser.getUsername());
