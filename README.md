@@ -61,6 +61,10 @@ MoocV1.01为SSM框架 MoocV1.10为spring boot框架<br>
 ---------------------MOOC V1.16更新----------------------------------<br>
 1.MOOC V1.16更新-修复删除课程订阅异常的问题。<br>
 2021.4.27更新<br>
+---------------------MOOC V1.17更新----------------------------------<br>
+1.MOOC V1.17更新-修复未登录的管理员注销的问题。<br>
+2.MOOC V1.17更新-修复vip检测异常的问题。<br>
+2021.5.12更新<br>
 
 ![Image text](https://raw.githubusercontent.com/yourmaileyes/MOOC/master/WebContent/show/1.png)
 

@@ -70,7 +70,7 @@ public class UserController {
 			return "login";
 		}
 		setlog(loginUser, req.getRemoteAddr(), "登录");
-		if (loginUser.getVip().getTime()<new Date().getTime()){
+		if (loginUser.getVip()!=null&&loginUser.getVip().getTime()<new Date().getTime()){
 			loginUser.setVip(null);
 			userBiz.updateByPrimaryKeySelective(loginUser);
 		}

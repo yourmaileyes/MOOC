@@ -502,6 +502,9 @@ public class AdminController {
 	public String logoutadmin(HttpSession session,HttpServletRequest req){
 		User loginUser = (User) session.getAttribute("loginUser");
 		session.invalidate();
+		if (loginUser == null){
+			return "loginadmin";
+		}
 		setlog(loginUser, req.getRemoteAddr(),"注销", loginUser.getUsername());
 		return "loginadmin";
 	}
